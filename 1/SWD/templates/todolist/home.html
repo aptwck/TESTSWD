@@ -1,0 +1,55 @@
+{% extends 'todolist/navbar.html' %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TodoApp</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+<body>
+{% block content %}
+    <section class="section">
+        <table class="table is-hoverable is-fullwidth">
+            <thead>
+            <tr>
+                <th>Task</th>
+                <th>Date</th>
+                <th>Completed</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            {% for todo in todos %}
+                <tr>
+                    <td>
+                        {% if todo.status == True %}
+                            <span style="text-decoration: line-through">{{ todo.task }}</span>
+                        {% else %}
+                            {{ todo.task }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if todo.status == True %}
+                            <span style="text-decoration: line-through">{{ todo.date }}</span>
+                        {% else %}
+                            {{ todo.date }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if todo.status == True %}
+                            <i class="far fa-check-circle"></i> สำเร็จ
+                        {% else %}
+                            <i class="far fa-circle"></i> <a href="status/{{todo.id}}">ไม่สำเร็จ</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="delete/{{todo.id}}">ลบ</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </section>
+{% endblock content %}
+</body>
+</html>
